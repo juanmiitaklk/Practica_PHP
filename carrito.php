@@ -16,24 +16,26 @@ if (!isset($_SESSION['carrito'])) {
 // Manejo de la cantidad de productos en el carrito
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $producto = $_POST['producto'];
-    $cantidad = $_POST['cantidad'];
+    $cantidad = intval($_POST['cantidad']);
 
     if (isset($_SESSION['carrito'][$producto])) {
-        $_SESSION['carrito'][$producto] += $cantidad;
+        $_SESSION['carrito'][$producto]['cantidad'] += $cantidad;
     } else {
-        $_SESSION['carrito'][$producto] = $cantidad;
+        $_SESSION['carrito'][$producto] = [
+            'nombre' => $productos[$producto],
+            'cantidad' => $cantidad
+        ];
     }
 }
 
-// Mostrar el carrito
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda - Carrito de Compras</title>
-
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -145,10 +147,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php if (empty($_SESSION['carrito'])): ?>
                     <li>Tu carrito está vacío.</li>
                 <?php else: ?>
-                    <?php foreach ($_SESSION['carrito'] as $id => $cantidad): ?>
+                    <?php foreach ($_SESSION['carrito'] as $id => $item): ?>
                         <li>
-                            <span> <?php echo $productos[$id]; ?></span>
-                            <span>Cantidad: <?php echo $cantidad ?></span>
+                            <span><?php echo htmlspecialchars($item['nombre']); ?></span>
+                            <span>Cantidad: <?php echo htmlspecialchars($item['cantidad']); ?></span>
                         </li>
                     <?php endforeach; ?>
                 <?php endif; ?>

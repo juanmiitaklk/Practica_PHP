@@ -11,7 +11,7 @@ $productos = [
 // Agregar al carrito
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $productoSeleccionado = $_POST['producto'];
-    $cantidad = $_POST['cantidad'];
+    $cantidad = intval($_POST['cantidad']);
 
     if ($cantidad > 0) {  
         // Iniciar el carrito si no existe
@@ -42,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda - Selección de Artículos</title>
     <style>
         body {
@@ -132,7 +133,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: #d9534f;
             margin-top: 10px;
         }
-
     </style>
 </head>
 <body>
@@ -142,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="producto">Artículo:</label>
             <select name="producto" id="producto" required>
                 <?php foreach ($productos as $id => $nombre): ?>
-                    <option value="<?php echo $id; ?>"><?php echo $nombre; ?></option>
+                    <option value="<?php echo htmlspecialchars($id); ?>"><?php echo htmlspecialchars($nombre); ?></option>
                 <?php endforeach; ?>
             </select>
 
@@ -150,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="number" name="cantidad" id="cantidad" min="1" value="1" required>
 
             <?php if (isset($mensaje)): ?>
-                <p class="message"><?php echo $mensaje; ?></p>
+                <p class="message"><?php echo htmlspecialchars($mensaje); ?></p>
             <?php endif; ?>
 
             <button type="submit">Añadir al carrito</button>
