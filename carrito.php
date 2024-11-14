@@ -1,19 +1,16 @@
 <?php
 session_start();
 
-// Lista de productos
 $productos = [
     "1" => "Camisetas",
     "2" => "Sudadera",
     "3" => "Pantalones",
 ];
 
-//Carrito
 if (!isset($_SESSION['carrito'])) {
     $_SESSION['carrito'] = [];
 }
 
-// Manejo de la cantidad de productos en el carrito
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $producto = $_POST['producto'];
     $cantidad = intval($_POST['cantidad']);
@@ -38,8 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Tienda - Carrito de Compras</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            background-color: #ffcccb;
             color: #333;
             margin: 0;
             padding: 0;
@@ -47,25 +44,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: linear-gradient(135deg, #f8f9fa, #e2e3e5);
+            background-image: linear-gradient(45deg, #fddfcb, #d0e7d1);
         }
 
         .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 700px;
+            background-color: #ffffe0;
+            padding: 20px;
+            border: 3px solid #ff69b4;
+            width: 80%;
+            max-width: 600px;
             text-align: center;
         }
 
         h1 {
             text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 28px;
-            font-weight: 600;
+            color: #ff1493;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
         }
 
         ul {
@@ -75,56 +71,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         li {
-            background-color: #f9f9f9;
-            padding: 12px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            font-size: 18px;
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px dashed #ff6347;
+            font-size: 16px;
             color: #333;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background-color 0.3s;
         }
 
         li:hover {
-            background-color: #f1f1f1;
+            background-color: #f0f8ff;
         }
 
         button {
             width: 100%;
-            padding: 14px;
-            background-color: #4CAF50;
+            padding: 12px;
+            background-color: #ff4500;
             color: white;
-            font-size: 18px;
-            border: none;
-            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            border: 2px solid #ff6347;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
             margin-top: 20px;
         }
 
         button:hover {
-            background-color: #45a049;
-            transform: translateY(-2px);
-        }
-
-        button:active {
-            background-color: #388e3c;
-            transform: translateY(1px);
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .boton-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
+            background-color: #ff6347;
         }
 
         .carrito-lista {
@@ -132,8 +107,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         .mensaje {
-            font-size: 18px;
-            color: #d9534f;
+            font-size: 16px;
+            color: #ff0000;
             margin-top: 10px;
         }
     </style>
@@ -147,10 +122,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php if (empty($_SESSION['carrito'])): ?>
                     <li>Tu carrito está vacío.</li>
                 <?php else: ?>
+<<<<<<< HEAD
                     <?php foreach ($_SESSION['carrito'] as $id => $item): ?>
                         <li>
                             <span><?php echo htmlspecialchars($item['nombre']); ?></span>
                             <span>Cantidad: <?php echo htmlspecialchars($item['cantidad']); ?></span>
+=======
+                    <?php foreach ($_SESSION['carrito'] as $id => $producto): ?>
+                        <li>
+                            <span> <?php echo $producto['nombre']; ?></span>
+                            <span>Cantidad: <?php echo $producto['cantidad']; ?></span>
+>>>>>>> 00ab120 (first commit)
                         </li>
                     <?php endforeach; ?>
                 <?php endif; ?>

@@ -1,25 +1,21 @@
 <?php
 session_start();
 
-// Lista de productos
 $productos = [
     "1" => "Camisetas",
     "2" => "Sudadera",
     "3" => "Pantalones",
 ];
 
-// Agregar al carrito
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $productoSeleccionado = $_POST['producto'];
     $cantidad = intval($_POST['cantidad']);
 
     if ($cantidad > 0) {  
-        // Iniciar el carrito si no existe
         if (!isset($_SESSION['carrito'])) {
             $_SESSION['carrito'] = [];
         }
 
-        // Agregar el producto y cantidad al carrito, junto con el nombre del producto
         if (isset($_SESSION['carrito'][$productoSeleccionado])) {
             $_SESSION['carrito'][$productoSeleccionado]['cantidad'] += $cantidad;
         } else {
@@ -29,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ];
         }
 
-        // Redirigir a la pagina de carrito
         header('Location: carrito.php');
         exit();
     } else {
@@ -45,9 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda - Selección de Artículos</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
+   body {
+            font-family: "Comic Sans MS", sans-serif;
+            background-color: #ffddc1;
             color: #333;
             margin: 0;
             padding: 0;
@@ -55,83 +50,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: linear-gradient(135deg, #f8f9fa, #e2e3e5);
+            background-image: linear-gradient(45deg, #ffd1dc, #c1ffd7);
         }
 
         .container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-            text-align: center;
+            background-color: #ffe4e1;
+            padding: 20px;
+            border: 2px solid #ff69b4;
+            border-radius: 0;
+            width: 90%;
+            max-width: 400px;
+            text-align: left;
+            box-shadow: none;
         }
 
         h1 {
             text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 28px;
-            font-weight: 600;
+            color: #ff1493;
+            margin-bottom: 15px;
+            font-size: 24px;
+            font-weight: bold;
         }
 
         label {
             display: block;
-            margin-bottom: 12px;
-            font-weight: 600;
-            font-size: 18px;
-            color: #5a5a5a;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #8b0000;
         }
 
         select, input[type="number"] {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 25px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-            background-color: #f9f9f9;
-            transition: border-color 0.3s;
-        }
-
-        select:focus, input[type="number"]:focus {
-            border-color: #007bff;
-            outline: none;
-            background-color: #f1f7ff;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #ff7f50;
+            border-radius: 0;
+            font-size: 14px;
+            background-color: #faf0e6;
+            color: #333;
         }
 
         button {
             width: 100%;
-            padding: 14px;
-            background-color: #4CAF50;
-            color: white;
-            font-size: 18px;
-            border: none;
-            border-radius: 8px;
+            padding: 12px;
+            background-color: #ff4500;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            border: 2px solid #8b0000;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
+            transition: background-color 0.2s;
         }
 
         button:hover {
-            background-color: #45a049;
-            transform: translateY(-2px);
-        }
-
-        button:active {
-            background-color: #388e3c;
-            transform: translateY(1px);
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
+            background-color: #ff6347;
         }
 
         .message {
-            font-size: 16px;
-            color: #d9534f;
+            font-size: 14px;
+            color: #ff0000;
             margin-top: 10px;
+            text-align: center;
         }
     </style>
 </head>
