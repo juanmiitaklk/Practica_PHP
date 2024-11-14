@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Comprobar si la cookie 'numero_pedidos' existe, sino, inicializarla
 if (!isset($_COOKIE['numero_pedidos'])) {
     setcookie('numero_pedidos', 0, time() + (86400 * 30), "/");
     $numero_pedidos = 0;
@@ -14,13 +13,13 @@ if (isset($_POST['procesar_pedido'])) {
     $numero_pedidos += 1;
     setcookie('numero_pedidos', $numero_pedidos, time() + (86400 * 30), "/");
     $_SESSION['fecha_ultimo_pedido'] = date('Y-m-d H:i:s');
-    $_SESSION['carrito'] = [];  // Vaciar el carrito
+    $_SESSION['carrito'] = [];  
 }
 
 // Borrar historial
 if (isset($_POST['borrar_historial'])) {
-    setcookie('numero_pedidos', 0, time() - 3600, "/");  // Eliminar cookie
-    unset($_SESSION['fecha_ultimo_pedido']);  // Borrar sesión
+    setcookie('numero_pedidos', 0, time() - 3600, "/");  
+    unset($_SESSION['fecha_ultimo_pedido']);  
 }
 
 ?>
@@ -31,59 +30,65 @@ if (isset($_POST['borrar_historial'])) {
     <meta charset="UTF-8">
     <title>Tienda - Historial de Pedidos</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
+               body {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            background-color: #e0e0e0;
+            color: #222;
             display: flex;
             height: 100vh;
             justify-content: center;
             align-items: center;
+            margin: 0;
+            padding: 0;
         }
 
         .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 600px;
-            text-align: center;
+            background-color: #d3d3d3;
+            padding: 15px;
+            border: 3px solid #a9a9a9;
+            border-radius: 0;
+            width: 90%;
+            max-width: 500px;
+            text-align: left;
+            box-shadow: none;
         }
 
         h1 {
-            color: #5a5a5a;
-            margin-bottom: 20px;
+            color: #4b0082;
+            font-size: 24px;
+            margin: 0 0 15px 0;
+            text-align: left;
         }
 
         p {
-            font-size: 18px;
-            margin-bottom: 15px;
+            font-size: 16px;
+            margin: 10px 0;
+            color: #333;
         }
 
         button {
             width: 100%;
-            padding: 12px;
-            background-color: #ff6347;
-            color: white;
-            font-size: 16px;
-            border: none;
-            border-radius: 4px;
+            padding: 10px;
+            background-color: #ffd700;
+            color: #000;
+            font-size: 14px;
+            font-weight: bold;
+            border: 2px solid #808080;
+            border-radius: 0;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.2s;
         }
 
         button:hover {
-            background-color: #e5533d;
+            background-color: #daa520;
         }
 
         form {
-            display: flex;
-            flex-direction: column;
+            display: block;
         }
 
         form button {
-            margin-top: 20px;
+            margin-top: 15px;
         }
     </style>
 </head>
