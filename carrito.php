@@ -122,17 +122,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php if (empty($_SESSION['carrito'])): ?>
                     <li>Tu carrito está vacío.</li>
                 <?php else: ?>
-<<<<<<< HEAD
-                    <?php foreach ($_SESSION['carrito'] as $id => $item): ?>
-                        <li>
-                            <span><?php echo htmlspecialchars($item['nombre']); ?></span>
-                            <span>Cantidad: <?php echo htmlspecialchars($item['cantidad']); ?></span>
-=======
                     <?php foreach ($_SESSION['carrito'] as $id => $producto): ?>
                         <li>
                             <span> <?php echo $producto['nombre']; ?></span>
                             <span>Cantidad: <?php echo $producto['cantidad']; ?></span>
->>>>>>> 00ab120 (first commit)
                         </li>
                     <?php endforeach; ?>
                 <?php endif; ?>

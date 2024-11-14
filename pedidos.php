@@ -16,14 +16,8 @@ if (isset($_POST['procesar_pedido'])) {
 }
 
 if (isset($_POST['borrar_historial'])) {
-<<<<<<< HEAD
-    setcookie('numero_pedidos', 0, time() - 3600, "/", "", true, true);  // Eliminar cookie
-    unset($_SESSION['fecha_ultimo_pedido']);  // Borrar sesión
-    $numero_pedidos = 0;
-=======
     setcookie('numero_pedidos', 0, time() - 3600, "/");  
     unset($_SESSION['fecha_ultimo_pedido']);  
->>>>>>> 00ab120 (first commit)
 }
 
 ?>
